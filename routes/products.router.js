@@ -21,12 +21,41 @@ productsRouter.get('/', (req, res) => {
 });
 productsRouter.get('/:id', (req, res) => {
   const { id } = req.params;
+  if (id == '999') {
+    res.status(404).json({
+      message: 'not found'
+    })
+  } else {
+    res.status(200).json({
+      id: id,
+      name: faker.commerce.productName(),
+      price: parseInt(faker.commerce.price()),
+      image: faker.image.url({ width:250, height:250 }),
+      category: faker.commerce.productAdjective(),
+    });
+  }
+});
+productsRouter.post('/', (req, res) => {
+  const { body } = req;
+  res.status(201).json({
+    message: 'created',
+    data: body,
+  });
+});
+productsRouter.patch('/:id', (req, res) => {
+  const { body } = req;
+  const { id } = req.params;
   res.json({
-    id: id,
-    name: faker.commerce.productName(),
-    price: parseInt(faker.commerce.price()),
-    image: faker.image.url({ width:250, height:250 }),
-    category: faker.commerce.productAdjective(),
+    id,
+    message: 'updated',
+    data: body,
+  });
+});
+productsRouter.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  res.json({
+    id,
+    message: 'deleted'
   });
 });
 
