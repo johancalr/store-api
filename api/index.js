@@ -24,7 +24,7 @@ const options = {
 app.use(cors(options));
 
 // Routes creation
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('Hello Word with Express')
 });
 
