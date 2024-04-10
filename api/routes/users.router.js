@@ -1,15 +1,13 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker');
+const { UsersService } = require('../services/users.service');
 
 const usersRouter = express.Router();
+const usersService = new UsersService();
 
 // Users
-usersRouter.get('/', (req, res) => {
-  res.json([{
-    id: faker.string.uuid(),
-    name: faker.person.fullName(),
-    lastName: faker.person.lastName(),
-  }])
+usersRouter.get('/', async (req, res) => {
+  const users = await usersService.find();
+  res.json(users);
 });
 
 module.exports = { usersRouter };
