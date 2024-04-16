@@ -5,10 +5,10 @@ const { setupModels } = require('../db/models');
 // Las variables de entorno se codifican para agregar una capa extra de seguridad
 const USER = encodeURIComponent(config.dbUser);
 const PASSWORD = encodeURIComponent(config.dbPassword);
-const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+const URI = `${config.dbEngine}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
 
 const sequelize = new Sequelize(URI, {
-  dialect: 'postgres',
+  dialect: config.dbEngine,
   logging: console.log,
 });
 
