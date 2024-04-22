@@ -5,14 +5,16 @@ class UsersService {
   constructor() {
   }
 
-  async find () {
-    const users = await models.User.findAll();
-    return users;
-  }
-
   async create (data) {
     const newUser =  await models.User.create(data);
     return newUser;
+  }
+
+  async find () {
+    const users = await models.User.findAll({
+      include: ['customer'],
+    });
+    return users;
   }
 
   async findOne(id) {
@@ -32,7 +34,7 @@ class UsersService {
   async delete(id) {
     const user = await this.findOne(id);
     await user.destroy();
-    return { id };
+    return { rta: true, id };
   }
 }
 

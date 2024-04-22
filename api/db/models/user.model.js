@@ -21,6 +21,11 @@ const UserSchema = {
     allowNull: false,
     type: DataTypes.STRING
   },
+  role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    defaultValue: 'customer'
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -30,8 +35,11 @@ const UserSchema = {
 }
 
 class User extends Model {
-  static associate(){
-    // associate
+  static associate(model){
+    this.hasOne(model.Customer, {
+      as: 'customer',
+      foreignKey: 'userId',
+    })
   }
   /**
    *

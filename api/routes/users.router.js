@@ -1,7 +1,7 @@
 const express = require('express');
-const { UsersService } = require('../services/users.service');
+const { UsersService } = require('../services/user.service');
 const { validatorHandler } = require('./../middlewares/validator.handler');
-const { updateUserSchema, createUserSchema, getUserSchema } = require('./../schemas/users.schema');
+const { updateUserSchema, createUserSchema, getUserSchema } = require('../schemas/user.schema');
 
 const usersRouter = express.Router();
 const usersService = new UsersService();
@@ -21,8 +21,8 @@ usersRouter.get('/:id',
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const category = await usersService.findOne(id);
-      res.json(category);
+      const user = await usersService.findOne(id);
+      res.json(user);
     } catch (error) {
       next(error);
     }
@@ -34,8 +34,8 @@ usersRouter.post('/',
   async (req, res, next) => {
     try {
       const body = req.body;
-      const newCategory = await usersService.create(body);
-      res.status(201).json(newCategory);
+      const newUser = await usersService.create(body);
+      res.status(201).json(newUser);
     } catch (error) {
       next(error);
     }
@@ -49,8 +49,8 @@ usersRouter.patch('/:id',
     try {
       const { id } = req.params;
       const body = req.body;
-      const category = await usersService.update(id, body);
-      res.json(category);
+      const user = await usersService.update(id, body);
+      res.json(user);
     } catch (error) {
       next(error);
     }
