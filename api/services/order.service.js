@@ -23,7 +23,8 @@ class OrdersService {
         {
           association: 'customer',
           include: ['user'],
-        }
+        },
+        'items',
       ]
     });
     if (!order) {
