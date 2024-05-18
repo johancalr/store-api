@@ -1,8 +1,11 @@
+# Configuration file to create Docker containers locally
+# and use them during the development phase
+
 services:
   postgres:
     image: 'postgres:13'
+    container_name: postgres_container
     environment:
-      - DATABASE_HOST=127.0.0.1
       - POSTGRES_DB=my_store
       - POSTGRES_USER=johan
       - POSTGRES_PASSWORD=admin123
@@ -12,12 +15,15 @@ services:
       - ./postgres_data:/var/lib/postgresql/data
 
   pgadmin:
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:8
+    container_name: pgadmin_container
     environment:
       - PGADMIN_DEFAULT_EMAIL=johancalr11@gmail.com
       - PGADMIN_DEFAULT_PASSWORD=root
     ports:
       - 5050:80
+    volumes:
+      - ./pgadmin_data:/var/lib/pgadmin
     depends_on:
       - postgres
 
