@@ -41,7 +41,7 @@ const CustomerSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'created_at',
-    defaultValue: Sequelize.NOW,
+    defaultValue: Sequelize.fn('NOW'),
   },
 }
 
