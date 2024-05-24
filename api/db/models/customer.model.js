@@ -22,7 +22,7 @@ const CustomerSchema = {
       key: 'id'
     },
     onUpdate: 'CASCADE',
-    OnDelete: 'RESTRIC',
+    onDelete: 'RESTRICT',
   },
   name: {
     allowNull: true,
