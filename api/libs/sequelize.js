@@ -10,6 +10,7 @@ if (config.isProd){
   options.ssl = {
     rejectUnauthorized: false,
   };
+  options.dialectModule = require('pg');
 }
 
 const sequelize = new Sequelize(config.dbUrl, options);
