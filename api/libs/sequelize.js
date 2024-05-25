@@ -7,9 +7,7 @@ const options = {
   logging: config.isProd? false : console.log,
 };
 if (config.isProd){
-  options.ssl = {
-    rejectUnauthorized: false,
-  };
+  // options.ssl = { rejectUnauthorized: false };
   options.dialectModule = require('pg');
 }
 
