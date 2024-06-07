@@ -1,7 +1,7 @@
 {
   "watch": [
     ".env",
-    "src"
+    "api/"
   ],
   "ext": "js",
   "ignore": [
