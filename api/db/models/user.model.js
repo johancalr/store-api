@@ -2,6 +2,7 @@
  *  Create a set of rules for the management of data from public.users table
  */
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const bcrypt = require('bcrypt');
 
 const USER_TABLE = 'users';
 
@@ -51,7 +52,22 @@ class User extends Model {
       sequelize,
       tableName: USER_TABLE,
       modelName: 'User',
-      timestamps: false // Create default fields
+      timestamps: false, // Create default fields
+      hooks: {
+        beforeCreate: async (user) => {
+          const password = await bcrypt.hash(user.password, 10);
+          user.password = password;
+        },
+        afterCreate: async (user) => {
+          delete user.dataValues.password;
+        },
+      },
+      defaultScope: {
+        attributes: { exclude: ['password'] },
+      },
+      scopes: { // use: models.User.scope("withPassword").findByPk(id)
+        allProperties:{ attributes: {}, }
+      },
     }
   }
 }
